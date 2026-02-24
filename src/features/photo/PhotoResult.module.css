@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.imageCard {
+  padding: 0;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: space-between;
+}

@@ -1,0 +1,40 @@
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg);
+  padding: var(--spacing-lg);
+}
+
+.card {
+  width: 100%;
+  max-width: 380px;
+  padding: var(--spacing-xl);
+  background-color: var(--color-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.title {
+  height: 20px;
+  width: 60%;
+}
+
+.subtitle {
+  height: 14px;
+  width: 40%;
+}
+
+.input {
+  height: 40px;
+  width: 100%;
+}
+
+.button {
+  height: 44px;
+  width: 100%;
+}
