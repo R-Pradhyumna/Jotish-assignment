@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import buttonStyles from "../../ui/Button.module.css";
 import inputStyles from "../../ui/Input.module.css";
 import styles from "./Login.module.css";
@@ -9,11 +9,21 @@ function Login() {
 
   const [username, setUsername] = useState("testuser");
   const [password, setPassword] = useState("Test123");
-  const [error] = useState("");
+  const [error, setError] = useState("");
+
+  if (localStorage.getItem("isAuthenticated") === "true") {
+    return <Navigate to="/" replace />;
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    navigate("/");
+
+    if (username === "testuser" && password === "Test123") {
+      localStorage.setItem("isAuthenticated", "true");
+      navigate("/");
+    } else {
+      setError("Invalid username or password.");
+    }
   }
 
   return (
@@ -30,7 +40,10 @@ function Login() {
               type="text"
               className={inputStyles.input}
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => {
+                setUsername(e.target.value);
+                if (error) setError("");
+              }}
               aria-invalid={!!error}
             />
           </div>
@@ -42,7 +55,10 @@ function Login() {
               type="password"
               className={inputStyles.input}
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (error) setError("");
+              }}
               aria-invalid={!!error}
             />
           </div>

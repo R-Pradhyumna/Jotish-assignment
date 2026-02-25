@@ -20,15 +20,23 @@ export async function fetchEmployeeList() {
 
   const rawEmployees = json?.TABLE_DATA?.data ?? [];
 
-  const employees = rawEmployees.map((row, index) => ({
-    id: row[3] || index,
-    name: row[0],
-    position: row[1],
-    city: row[2],
-    startDate: row[4],
-    salary: row[5],
-    salaryRaw: row[5],
-  }));
+  const employees = rawEmployees.map((row, index) => {
+    const salaryFormatted = row[5] || "$0";
+
+    const salaryNumber = Number(
+      salaryFormatted.replace("$", "").replace(/,/g, ""),
+    );
+
+    return {
+      id: row[3] || index,
+      name: row[0],
+      position: row[1],
+      city: row[2],
+      startDate: row[4],
+      salary: salaryNumber,
+      salaryFormatted,
+    };
+  });
 
   return employees;
 }

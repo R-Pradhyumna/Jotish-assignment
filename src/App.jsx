@@ -18,6 +18,7 @@ const EmployeeDetail = lazy(
 const PhotoResult = lazy(() => import("./features/photo/PhotoResult"));
 
 import LoginSkeleton from "./features/auth/LoginSkeleton";
+import ProtectedRoute from "./features/auth/ProtectedRoute";
 import AppLayout from "./layouts/AppLayout";
 import AppLayoutSkeleton from "./ui/AppLayoutSkeleton";
 import Error from "./ui/Error";
@@ -42,9 +43,11 @@ const router = createBrowserRouter([
   },
   {
     element: (
-      <Suspense fallback={<AppLayoutSkeleton />}>
-        <AppLayout />,
-      </Suspense>
+      <ProtectedRoute>
+        <Suspense fallback={<AppLayoutSkeleton />}>
+          <AppLayout />
+        </Suspense>
+      </ProtectedRoute>
     ),
     errorElement: <Error />,
 
@@ -52,7 +55,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <EmployeeList />,
-        // loader: listLoader,
       },
       {
         path: "/analytics",
@@ -65,18 +67,16 @@ const router = createBrowserRouter([
       {
         path: "/employees/:employeeId",
         element: <EmployeeDetail />,
-        // loader: detailLoader,
       },
       {
         path: "/photo-result",
         element: <PhotoResult />,
-        // loader: photoLoader,
-      },
-      {
-        path: "*",
-        element: <PageNotFound />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <PageNotFound />,
   },
 ]);
 
