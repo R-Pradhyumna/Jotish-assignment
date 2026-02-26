@@ -1,4 +1,4 @@
-const API_URL = "https://backend.jotish.in/backend_dev/gettabledata.php";
+export const API_URL = "https://backend.jotish.in/backend_dev/gettabledata.php";
 
 export async function fetchEmployeeList() {
   const response = await fetch(API_URL, {

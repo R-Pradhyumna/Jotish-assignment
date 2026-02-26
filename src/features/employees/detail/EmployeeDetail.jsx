@@ -81,7 +81,7 @@ function EmployeeDetail() {
     reader.readAsDataURL(file);
 
     // Reset input so selecting same image again works
-    event.target.value = null;
+    event.target.value = "";
   }
 
   if (isLoading) return <EmployeeDetailSkeleton />;
@@ -142,12 +142,13 @@ function EmployeeDetail() {
         type="file"
         accept="image/*"
         capture="environment"
+        data-testid="file-input"
         ref={fileInputRef}
         onChange={handleFileChange}
         style={{ display: "none" }}
       />
 
-      {fileError && <p style={styles.fileError}>{fileError}</p>}
+      {fileError && <p className={styles.fileError}>{fileError}</p>}
     </section>
   );
 }

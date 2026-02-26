@@ -1,6 +1,5 @@
-import { describe, test, expect, beforeEach, vi } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 
-// Mock FIRST
 const mockNavigate = vi.fn();
 
 vi.mock("react-router-dom", async () => {
@@ -12,8 +11,8 @@ vi.mock("react-router-dom", async () => {
 });
 
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router-dom";
 import Login from "../features/auth/Login";
 
 beforeEach(() => {

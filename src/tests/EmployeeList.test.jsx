@@ -11,6 +11,7 @@ vi.mock("react-router-dom", async () => {
 });
 
 import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";
 import {
   afterAll,
@@ -21,7 +22,6 @@ import {
   expect,
   test,
 } from "vitest";
-import userEvent from "@testing-library/user-event";
 import EmployeeList from "../features/employees/list/EmployeeList";
 import { server } from "../mocks/server";
 import { renderWithProviders } from "./test-utils";
