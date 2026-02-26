@@ -1,6 +1,6 @@
 # Jotish ReactJS Assignment
 
-A ReactJS application built as part of the Jotish Frontend Developer Internship assignment.
+A responsive ReactJS application developed for the Jotish Frontend Developer Internship assignment, showcasing scalable architecture, performance optimization, and comprehensive testing.
 
 This application demonstrates:
 
@@ -18,6 +18,19 @@ This application demonstrates:
 Experience the fully deployed application:
 
 https://jotish-assignment.netlify.app/
+
+---
+
+## Tech Stack
+
+![React](https://img.shields.io/badge/React-18-blue?logo=react)
+![Vite](https://img.shields.io/badge/Vite-7-purple?logo=vite)
+![React Router](https://img.shields.io/badge/React_Router-v6-red?logo=reactrouter)
+![React Query](https://img.shields.io/badge/React_Query-v5-orange)
+![Recharts](https://img.shields.io/badge/Recharts-Charts-green)
+![Leaflet](https://img.shields.io/badge/Leaflet-Maps-brightgreen?logo=leaflet)
+![pnpm](https://img.shields.io/badge/pnpm-package_manager-yellow?logo=pnpm)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
 ---
 
@@ -65,7 +78,7 @@ https://jotish-assignment.netlify.app/
 <tr>
 <td align="center">
 <b>City Distribution</b><br/>
-<img src="./public/screenshots/Salary-chart.png" width="400"/>
+<img src="./public/screenshots/City-chart.png" width="400"/>
 </td>
 <td align="center">
 <b>Top 10</b><br/>
@@ -94,29 +107,21 @@ https://jotish-assignment.netlify.app/
 
 ---
 
-## Performance & Engineering Highlights
+## 🎥 Demo Video
 
-- Redirects to **Analytics Dashboard** after login (stronger first impression)
-- ~90% overall test coverage
-- Comprehensive unit & integration testing (Vitest + Testing Library)
-- API layer fully tested with MSW
-- React Query caching (`staleTime = 2 minutes`)
-- Lazy-loaded routes (code splitting)
-- Production build optimized via Vite
-- Lighthouse / PageSpeed optimized
+[![Watch the Demo](https://img.youtube.com/vi/4xE0gjyIXyo/maxresdefault.jpg)](https://www.youtube.com/watch?v=4xE0gjyIXyo)
 
 ---
 
-## Tech Stack
+## Performance & Engineering Highlights
 
-![React](https://img.shields.io/badge/React-18-blue?logo=react)
-![Vite](https://img.shields.io/badge/Vite-7-purple?logo=vite)
-![React Router](https://img.shields.io/badge/React_Router-v6-red?logo=reactrouter)
-![React Query](https://img.shields.io/badge/React_Query-v5-orange)
-![Recharts](https://img.shields.io/badge/Recharts-Charts-green)
-![Leaflet](https://img.shields.io/badge/Leaflet-Maps-brightgreen?logo=leaflet)
-![pnpm](https://img.shields.io/badge/pnpm-package_manager-yellow?logo=pnpm)
-![License](https://img.shields.io/badge/License-MIT-blue)
+- Redirects to **Analytics Dashboard** after login (stronger first impression)
+- ~90% overall test coverage across components, hooks, and utilities
+- Comprehensive unit & integration testing (Vitest + Testing Library)
+- API layer fully tested with MSW
+- React Query caching (`staleTime = 2 minutes`)
+- Optimized production bundle with route-based code splitting
+- Performance tuned for Lighthouse best practices
 
 ---
 
@@ -133,7 +138,6 @@ https://jotish-assignment.netlify.app/
 
 - Fetches data from REST API
 - Uses React Query for caching and state management
-- Search/filter support (if implemented)
 - Clickable employee cards
 
 ---
@@ -181,7 +185,7 @@ https://jotish-assignment.netlify.app/
 
 ---
 
-## API Details
+## Backend API Integration
 
 **Endpoint:**
 
@@ -208,6 +212,12 @@ https://backend.jotish.in/backend_dev/gettabledata.php
 - Route-level error handling
 - React Query caching with staleTime = 2 minutes
 - SEO improvements (meta tags, robots.txt, canonical configuration)
+
+---
+
+### Why Feature-Based Structure?
+
+Improves scalability, test isolation, and maintainability by grouping UI, hooks, services, and tests per feature instead of by file type.
 
 ---
 
