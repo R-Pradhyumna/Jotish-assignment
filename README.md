@@ -15,20 +15,82 @@ This application demonstrates:
 
 ## Live Demo
 
+Experience the fully deployed application:
+
 https://jotish-assignment.netlify.app/
 
 ---
 
 ## Screenshots
 
-- [Pagespeed analytics]()
-- [Test results](./public/screenshots/Test-results.png)
-- [Login](./public/screenshots//Login.png)
-- [City Distribution](./public/screenshots/Salary-chart.png)
-- [Top 10](./public/screenshots/Top-10-chart.png)
-- [Salary Distribution](./public/screenshots/Salary-chart.png)
-- [Map](./public/screenshots/Map.png)
-- [Employee list](./public/screenshots/List.png)
+---
+
+### Performance
+
+<table>
+<tr>
+<td align="center">
+<b>Desktop</b><br/>
+<img src="./public/screenshots/Desktop-perf.png" width="400"/>
+</td>
+<td align="center">
+<b>Mobile</b><br/>
+<img src="./public/screenshots/Mobile-perf.png" width="400"/>
+</td>
+</tr>
+</table>
+
+---
+
+### Testing & Authentication
+
+<table>
+<tr>
+<td align="center">
+<b>Test Results</b><br/>
+<img src="./public/screenshots/Test-results.png" width="400"/>
+</td>
+<td align="center">
+<b>Login</b><br/>
+<img src="./public/screenshots/Login.png" width="400"/>
+</td>
+</tr>
+</table>
+
+---
+
+### Data Visualization
+
+<table>
+<tr>
+<td align="center">
+<b>City Distribution</b><br/>
+<img src="./public/screenshots/Salary-chart.png" width="400"/>
+</td>
+<td align="center">
+<b>Top 10</b><br/>
+<img src="./public/screenshots/Top-10-chart.png" width="400"/>
+</td>
+</tr>
+<tr>
+<td align="center">
+<b>Salary Distribution</b><br/>
+<img src="./public/screenshots/Salary-chart.png" width="400"/>
+</td>
+<td align="center">
+<b>Map</b><br/>
+<img src="./public/screenshots/Map.png" width="400"/>
+</td>
+</tr>
+</table>
+
+---
+
+### Employee List
+
+<p align="center">
+<img src="./public/screenshots/List.png" width="500"/>
+</p>
 
 ---
 
