@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .title {
@@ -10,18 +12,36 @@
 }
 
 .imageCard {
-  padding: 0;
   overflow: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: var(--spacing-md);
 }
 
 .image {
   width: 100%;
   height: auto;
+  object-fit: contain;
   display: block;
+}
+
+.backButton {
+  align-self: center;
 }
 
 .actions {
   display: flex;
-  gap: var(--spacing-md);
   justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-md);
+}
+
+@media (max-width: 600px) {
+  .actions {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .actions button {
+    width: 100%;
+  }
 }

@@ -33,7 +33,3 @@
   border: 1px solid var(--color-border);
   color: white;
 }
-
-.secondary:hover {
-  background-color: #f1f5f9;
-}

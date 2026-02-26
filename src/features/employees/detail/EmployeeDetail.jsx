@@ -17,6 +17,20 @@ function EmployeeDetail() {
 
   const fileInputRef = useRef(null);
 
+  const [storedImage] = useState(() => {
+    const stored = localStorage.getItem(`photo_${employeeId}`);
+    if (!stored) return null;
+
+    const parsed = JSON.parse(stored);
+
+    if (Date.now() < parsed.expiry) {
+      return parsed.image;
+    }
+
+    localStorage.removeItem(`photo_${employeeId}`);
+    return null;
+  });
+
   function handleCaptureClick() {
     fileInputRef.current.click();
   }
@@ -34,8 +48,8 @@ function EmployeeDetail() {
       return;
     }
 
-    // --- SIZE VALIDATION (5MB) ---
-    const MAX_SIZE = 5 * 1024 * 1024;
+    // --- SIZE VALIDATION (2MB) ---
+    const MAX_SIZE = 2 * 1024 * 1024;
 
     if (file.size > MAX_SIZE) {
       setFileError("Image must be smaller than 5MB.");
@@ -46,6 +60,16 @@ function EmployeeDetail() {
     const reader = new FileReader();
 
     reader.onloadend = () => {
+      const expiry = Date.now() + 60 * 1000; // 1 minute
+
+      localStorage.setItem(
+        `photo_${employeeId}`,
+        JSON.stringify({
+          image: reader.result,
+          expiry,
+        }),
+      );
+
       navigate("/photo-result", {
         state: {
           employeeId,
@@ -69,8 +93,8 @@ function EmployeeDetail() {
   return (
     <section className={styles.container}>
       <button
-        className={`${buttonStyles.button} ${buttonStyles.secondary}`}
-        onClick={() => navigate(-1)}
+        className={`${buttonStyles.button} ${buttonStyles.secondary} ${styles.backButton}`}
+        onClick={() => navigate("/", { replace: true })}
       >
         ← Back
       </button>
@@ -79,7 +103,7 @@ function EmployeeDetail() {
         <div className={styles.headerRow}>
           <h2>{employee.name}</h2>
           <span className={styles.salary}>
-            {employee.salary.toLocaleString()}
+            ${employee.salary.toLocaleString()}
           </span>
         </div>
 
@@ -91,12 +115,28 @@ function EmployeeDetail() {
         </div>
       </article>
 
-      <button
-        className={`${buttonStyles.button} ${buttonStyles.primary}`}
-        onClick={handleCaptureClick}
-      >
-        Capture Photo
-      </button>
+      {storedImage && (
+        <section className={styles.photoSection}>
+          <h3 className={styles.photoTitle}>Captured Photo</h3>
+
+          <div className={styles.photoWrapper}>
+            <img
+              src={storedImage}
+              alt="Captured employee"
+              className={styles.photo}
+            />
+          </div>
+        </section>
+      )}
+
+      <div className={styles.actions}>
+        <button
+          className={`${buttonStyles.button} ${buttonStyles.primary}`}
+          onClick={handleCaptureClick}
+        >
+          Capture Photo
+        </button>
+      </div>
 
       <input
         type="file"
@@ -107,9 +147,7 @@ function EmployeeDetail() {
         style={{ display: "none" }}
       />
 
-      {fileError && (
-        <p style={{ color: "#dc2626", marginTop: "8px" }}>{fileError}</p>
-      )}
+      {fileError && <p style={styles.fileError}>{fileError}</p>}
     </section>
   );
 }

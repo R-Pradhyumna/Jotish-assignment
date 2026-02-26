@@ -90,7 +90,26 @@ input {
 
 /* -------------------- ACCESSIBILITY -------------------- */
 
-:focus-visible {
+*:focus-visible {
+  outline: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+}
+
+.leaflet-container {
+  outline: none !important;
+}
+
+.leaflet-container:focus {
+  outline: none !important;
+}
+
+.leaflet-container:focus-visible {
+  outline: none !important;
 }

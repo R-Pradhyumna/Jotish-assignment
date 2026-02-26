@@ -31,8 +31,6 @@ function EmployeeAnalytics() {
 
   return (
     <section className={styles.container}>
-      <h2>Employee Analytics</h2>
-
       <div className={styles.kpiSection}>
         <div className={styles.kpiItem}>
           <div className={styles.kpiLabel}>Total Employees</div>
@@ -67,12 +65,20 @@ function EmployeeAnalytics() {
         <option value="distribution">Salary Distribution</option>
       </select>
 
-      <div className={styles.chartWrapper}>
-        {selectedChart === "top" && <TopSalaryChart data={topData} />}
-        {selectedChart === "city" && <CityDistributionChart data={cityData} />}
-        {selectedChart === "distribution" && (
-          <SalaryDistributionChart data={salaryBins} />
-        )}
+      <div className={styles.noFocus}>
+        <div className={styles.chartWrapper}>
+          <div className={styles.chartInner}>
+            {selectedChart === "top" && <TopSalaryChart data={topData} />}
+
+            {selectedChart === "city" && (
+              <CityDistributionChart data={cityData} />
+            )}
+
+            {selectedChart === "distribution" && (
+              <SalaryDistributionChart data={salaryBins} />
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );

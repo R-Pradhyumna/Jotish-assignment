@@ -1,10 +1,11 @@
 import "leaflet/dist/leaflet.css";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   CircleMarker,
   MapContainer,
   Popup,
   TileLayer,
+  Tooltip,
   useMap,
 } from "react-leaflet";
 
@@ -20,6 +21,8 @@ function FitBounds({ cityData }) {
   const map = useMap();
 
   useEffect(() => {
+    if (!cityData || cityData.length === 0) return;
+
     const bounds = [];
 
     cityData.forEach((city) => {
@@ -29,38 +32,68 @@ function FitBounds({ cityData }) {
 
     if (bounds.length === 1) {
       map.setView(bounds[0], 5);
-    }
+    } else if (bounds.length > 1) {
+      const isMobile = window.innerWidth < 768;
 
-    if (bounds.length > 0) {
-      map.fitBounds(bounds, { padding: [60, 60] });
+      map.fitBounds(bounds, {
+        padding: isMobile ? [120, 120] : [60, 60],
+      });
     }
   }, [cityData, map]);
 
   return null;
 }
 
+function FlyToMarker({ coords }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!coords) return;
+
+    const zoomLevel = 5;
+
+    const offsetLng = coords[1] - 5;
+    const adjustedCoords = [coords[0], offsetLng];
+
+    map.flyTo(adjustedCoords, zoomLevel, {
+      duration: 1.5,
+      easeLinearity: 0.25,
+    });
+  }, [coords, map]);
+
+  return null;
+}
+
 function EmployeeMap() {
   const { data: employees, isLoading, error } = useEmployeeList();
+  const [selectedCoords, setSelectedCoords] = useState(null);
 
-  const cityData = useMemo(() => getCityDistribution(employees), [employees]);
-
-  if (!cityData || cityData.length === 0)
-    return <p>No location data available</p>;
+  const cityData = useMemo(() => {
+    if (!employees) return [];
+    return getCityDistribution(employees);
+  }, [employees]);
 
   if (isLoading) return <EmployeeMapSkeleton />;
 
   if (error) return <p>Failed to load map.</p>;
 
-  return (
-    <section className={styles.container}>
-      <h2>Employee Locations</h2>
+  if (!cityData.length) return <p>No location data available</p>;
 
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
+  return (
+    <section className={styles.mapPage}>
       <div className={styles.mapWrapper}>
         <MapContainer
           center={[20, 0]}
           zoom={2}
-          scrollWheelZoom={false}
-          style={{ height: "550px", width: "100%" }}
+          minZoom={2}
+          maxZoom={6}
+          scrollWheelZoom={!isMobile}
+          dragging={true}
+          touchZoom={true}
+          doubleClickZoom={!isMobile}
+          className={styles.map}
         >
           <TileLayer
             attribution="&copy; OpenStreetMap contributors"
@@ -68,6 +101,8 @@ function EmployeeMap() {
           />
 
           <FitBounds cityData={cityData} />
+
+          <FlyToMarker coords={selectedCoords} />
 
           {cityData.map((city) => {
             const coords = CITY_COORDINATES[city.city];
@@ -77,14 +112,28 @@ function EmployeeMap() {
               <CircleMarker
                 key={city.city}
                 center={coords}
-                radius={6 + city.count * 1.5}
+                radius={Math.sqrt(city.count) * 4}
                 pathOptions={{
                   color: "#F97316",
                   fillColor: "#F97316",
                   fillOpacity: 0.5,
                   weight: 2,
                 }}
+                eventHandlers={{
+                  click: (e) => {
+                    setSelectedCoords(coords);
+
+                    const path = e.originalEvent?.target;
+                    if (path && typeof path.blur === "function") {
+                      path.blur();
+                    }
+                  },
+                }}
               >
+                <Tooltip direction="top" offset={[0, -8]} opacity={1}>
+                  {city.city}
+                </Tooltip>
+
                 <Popup>
                   <strong>{city.city}</strong>
                   <br />

@@ -65,3 +65,18 @@
   color: var(--color-text-muted);
   font-size: 0.9rem;
 }
+
+@media (min-width: 768px) {
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .metaRow {
+    flex-direction: column;
+    gap: 4px;
+  }
+}

@@ -15,18 +15,35 @@ function SalaryDistributionChart({ data }) {
   }
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
+    <ResponsiveContainer width="100%" height="100%">
       <BarChart
         data={data}
-        margin={{ top: 20, right: 20, left: 10, bottom: 20 }}
+        margin={{ top: 20, right: 5, left: -10, bottom: 10 }}
       >
-        <CartesianGrid stroke="#E5E7EB" strokeDasharray="3 3" />
+        <CartesianGrid
+          stroke="#E5E7EB"
+          strokeDasharray="3 3"
+          vertical={false}
+        />
 
-        <XAxis dataKey="range" tick={{ fill: "#6B7280", fontSize: 13 }} />
+        <XAxis
+          dataKey="range"
+          interval={0}
+          angle={-20}
+          textAnchor="end"
+          minTickGap={0}
+          tickMargin={10}
+          tick={{ fill: "#6B7280", fontSize: 11 }}
+        />
 
-        <YAxis allowDecimals={false} tick={{ fill: "#6B7280", fontSize: 13 }} />
+        <YAxis
+          width={30}
+          allowDecimals={false}
+          tick={{ fill: "#6B7280", fontSize: 12 }}
+        />
 
         <Tooltip
+          trigger="hover"
           cursor={false}
           formatter={(value) => [`${Number(value) || 0} employees`, "Count"]}
         />
@@ -36,7 +53,6 @@ function SalaryDistributionChart({ data }) {
             dataKey="count"
             position="top"
             formatter={(value) => (value > 0 ? value : "")}
-            style={{ fill: "#111827", fontSize: 12 }}
           />
         </Bar>
       </BarChart>

@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
 import buttonStyles from "../../ui/Button.module.css";
 import cardStyles from "../../ui/Card.module.css";
 import styles from "./PhotoResult.module.css";
@@ -7,27 +9,54 @@ function PhotoResult() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const image = location.state?.image;
+  const employeeId = location.state?.employeeId;
+
+  const [image] = useState(() => {
+    // If image was passed through navigation, use it
+    if (location.state?.image) {
+      return location.state.image;
+    }
+
+    // If no employeeId, nothing to retrieve
+    if (!employeeId) return null;
+
+    // Check localStorage
+    const stored = localStorage.getItem(`photo_${employeeId}`);
+    if (!stored) return null;
+
+    const parsed = JSON.parse(stored);
+
+    // Validate expiry
+    if (Date.now() < parsed.expiry) {
+      return parsed.image;
+    }
+
+    // Expired → cleanup
+    localStorage.removeItem(`photo_${employeeId}`);
+    return null;
+  });
 
   function handleRetake() {
-    navigate(-1);
+    navigate(`/employees/${employeeId}`);
   }
 
   function handleDone() {
-    navigate("/", { replace: true });
+    navigate(`/employees/${employeeId}`);
   }
 
   if (!image) {
     return (
       <section className={styles.container}>
-        <h2 className={styles.title}>No Photo Found</h2>
-        <p className={styles.message}>You haven't captured a photo yet.</p>
+        <h2 className={styles.title}>Photo Expired</h2>
+        <p className={styles.message}>
+          The captured photo is no longer available. Please capture again.
+        </p>
 
         <button
           className={`${buttonStyles.button} ${buttonStyles.primary}`}
-          onClick={() => navigate("/")}
+          onClick={() => navigate(`/employees/${employeeId}`)}
         >
-          Go to Employee List
+          Capture Again
         </button>
       </section>
     );
@@ -36,8 +65,8 @@ function PhotoResult() {
   return (
     <section className={styles.container}>
       <button
-        className={`${buttonStyles.button} ${buttonStyles.secondary}`}
-        onClick={() => navigate(-1)}
+        className={`${buttonStyles.button} ${buttonStyles.secondary} ${styles.backButton}`}
+        onClick={() => navigate(`/employees/${employeeId}`)}
       >
         ← Back
       </button>

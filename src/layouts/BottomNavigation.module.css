@@ -8,6 +8,8 @@
   border-top: 1px solid #e5e7eb;
 
   height: 64px;
+
+  z-index: 1000;
 }
 
 .list {
