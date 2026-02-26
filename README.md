@@ -13,6 +13,38 @@ This application demonstrates:
 
 ---
 
+## Live Demo
+
+https://jotish-assignment.netlify.app/
+
+---
+
+## Screenshots
+
+- [Pagespeed analytics]()
+- [Test results](./public/screenshots/Test-results.png)
+- [Login](./public/screenshots//Login.png)
+- [City Distribution](./public/screenshots/Salary-chart.png)
+- [Top 10](./public/screenshots/Top-10-chart.png)
+- [Salary Distribution](./public/screenshots/Salary-chart.png)
+- [Map](./public/screenshots/Map.png)
+- [Employee list](./public/screenshots/List.png)
+
+---
+
+## Performance & Engineering Highlights
+
+- Redirects to **Analytics Dashboard** after login (stronger first impression)
+- ~90% overall test coverage
+- Comprehensive unit & integration testing (Vitest + Testing Library)
+- API layer fully tested with MSW
+- React Query caching (`staleTime = 2 minutes`)
+- Lazy-loaded routes (code splitting)
+- Production build optimized via Vite
+- Lighthouse / PageSpeed optimized
+
+---
+
 ## Tech Stack
 
 ![React](https://img.shields.io/badge/React-18-blue?logo=react)
@@ -26,14 +58,12 @@ This application demonstrates:
 
 ---
 
-## Features
-
 ### Login Page
 
 - Username: `testuser`
 - Password: `Test123`
 - Client-side validation
-- Redirects to main app on success
+- Redirects to Analytics Dashboard on success
 
 ---
 
@@ -97,10 +127,12 @@ https://backend.jotish.in/backend_dev/gettabledata.php
 
 **POST Body:**
 
+```json
 {
-"username": "test",
-"password": "123456"
+  "username": "test",
+  "password": "123456"
 }
+```
 
 ---
 
@@ -113,6 +145,36 @@ https://backend.jotish.in/backend_dev/gettabledata.php
 - Global error boundary
 - Route-level error handling
 - React Query caching with staleTime = 2 minutes
+- SEO improvements (meta tags, robots.txt, canonical configuration)
+
+---
+
+## Testing & Code Coverage
+
+Testing stack:
+
+- Vitest
+- React Testing Library
+- MSW (Mock Service Worker)
+
+Coverage includes:
+
+- Component rendering
+- Navigation behavior
+- React Query loading & error states
+- API transformation logic
+- File validation (type + size)
+- LocalStorage expiry logic
+- Chart and map conditional rendering
+
+### Coverage Summary
+
+| Metric     | Coverage |
+| ---------- | -------- |
+| Statements | ~89%+    |
+| Branches   | ~81%+    |
+| Lines      | ~93%+    |
+| Functions  | ~87%+    |
 
 ---
 
@@ -120,33 +182,30 @@ https://backend.jotish.in/backend_dev/gettabledata.php
 
 ### Clone the repository
 
+```bash
 git clone https://github.com/R-Pradhyumna/Jotish-assignment.git
 cd Jotish-assignment
+```
 
 ### Install dependencies
 
+```bash
 pnpm install
+```
 
 ### Start development server
 
+```bash
 pnpm dev
-
 App runs at: http://localhost:5173
-
----
+```
 
 ## Production Build
 
+```bash
 pnpm build
 pnpm preview
-
----
-
-## Screenshots & Demo
-
-(Include screenshots here)
-
-(Include screen recording link here)
+```
 
 ---
 
@@ -171,5 +230,3 @@ pnpm preview
 ## Author
 
 R Pradhyumna
-
----

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+
 import buttonStyles from "../../ui/Button.module.css";
 import inputStyles from "../../ui/Input.module.css";
 import styles from "./Login.module.css";
@@ -12,7 +13,7 @@ function Login() {
   const [error, setError] = useState("");
 
   if (localStorage.getItem("isAuthenticated") === "true") {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/analytics" replace />;
   }
 
   function handleSubmit(e) {
@@ -20,7 +21,7 @@ function Login() {
 
     if (username === "testuser" && password === "Test123") {
       localStorage.setItem("isAuthenticated", "true");
-      navigate("/");
+      navigate("/analytics");
     } else {
       setError("Invalid username or password.");
     }

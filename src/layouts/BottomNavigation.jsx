@@ -7,21 +7,6 @@ function BottomNavigation() {
       <ul className={styles.list}>
         <li>
           <NavLink
-            to="/"
-            end
-            className={({ isActive }) =>
-              isActive ? styles.active : styles.link
-            }
-          >
-            <span className={styles.icon} aria-hidden="true">
-              🏠
-            </span>
-            <span className={styles.label}>List</span>
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink
             to="/analytics"
             className={({ isActive }) =>
               isActive ? styles.active : styles.link
@@ -45,6 +30,21 @@ function BottomNavigation() {
               🗺
             </span>
             <span className={styles.label}>Map</span>
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              isActive ? styles.active : styles.link
+            }
+          >
+            <span className={styles.icon} aria-hidden="true">
+              📋
+            </span>
+            <span className={styles.label}>List</span>
           </NavLink>
         </li>
       </ul>

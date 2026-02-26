@@ -6,6 +6,13 @@ function Header() {
 
   function handleLogout() {
     localStorage.removeItem("isAuthenticated");
+
+    Object.keys(localStorage).forEach((key) => {
+      if (key.startsWith("photo_")) {
+        localStorage.removeItem(key);
+      }
+    });
+
     navigate("/login", { replace: true });
   }
 

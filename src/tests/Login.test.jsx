@@ -45,7 +45,7 @@ describe("Login Page", () => {
     ).toBeInTheDocument();
   });
 
-  test("navigates to '/' on valid login", async () => {
+  test("navigates to '/analytics' on valid login", async () => {
     render(<Login />);
 
     await userEvent.clear(screen.getByLabelText(/username/i));
@@ -56,7 +56,7 @@ describe("Login Page", () => {
 
     await userEvent.click(screen.getByRole("button", { name: /login/i }));
 
-    expect(mockNavigate).toHaveBeenCalledWith("/");
+    expect(mockNavigate).toHaveBeenCalledWith("/analytics");
   });
 
   test("redirects immediately if already authenticated", () => {

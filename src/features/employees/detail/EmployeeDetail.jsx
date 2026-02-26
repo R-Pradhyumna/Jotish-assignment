@@ -48,8 +48,8 @@ function EmployeeDetail() {
       return;
     }
 
-    // --- SIZE VALIDATION (2MB) ---
-    const MAX_SIZE = 2 * 1024 * 1024;
+    // --- SIZE VALIDATION (5MB) ---
+    const MAX_SIZE = 5 * 1024 * 1024;
 
     if (file.size > MAX_SIZE) {
       setFileError("Image must be smaller than 5MB.");
